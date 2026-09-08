@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>02 MODZ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  color:white;
+  overflow-x:hidden;
+  background:linear-gradient(
+    120deg,
+    #00eaff,#7b2cff,#ff00aa,
+    #ff4d00,#00ff88,#00eaff
+  );
+  background-size:600% 600%;
+  animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.container{
+  width:92%;
+  max-width:500px;
+  margin:auto;
+  padding:30px 0 40px;
+  text-align:center;
+}
+
+.logo{
+  font-size:42px;
+  font-weight:900;
+  text-shadow:0 0 10px #00ffff,
+              0 0 25px #ff00ff,
+              0 0 40px white;
+}
+
+.welcome{
+  margin-top:10px;
+  font-size:21px;
+  font-weight:bold;
+}
+
+button,.join{
+  border:0;
+  border-radius:15px;
+  padding:14px 22px;
+  font-size:16px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  background:linear-gradient(
+    90deg,#ff00cc,#3333ff,#00eaff
+  );
+  background-size:300% 300%;
+  animation:btn 4s infinite;
+  box-shadow:0 0 20px rgba(255,255,255,.45);
+}
+
+@keyframes btn{
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
+}
+
+.speech{
+  margin:20px 0;
+}
+
+.login{
+  margin-top:20px;
+  padding:25px;
+  border-radius:25px;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(10px);
+}
+
+.login h2{
+  margin-bottom:15px;
+}
+
+.login input{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border:2px solid #00ffff;
+  border-radius:12px;
+  outline:none;
+  background:rgba(255,255,255,.12);
+  color:white;
+  font-size:16px;
+}
+
+.login input::placeholder{
+  color:#ddd;
+}
+
+.message{
+  margin-top:12px;
+  min-height:22px;
+  font-weight:bold;
+}
+
+.social{
+  margin-top:25px;
+  display:grid;
+  gap:15px;
+}
+
+.card{
+  padding:20px;
+  border-radius:20px;
+  background:rgba(0,0,0,.42);
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 20px rgba(255,255,255,.25);
+}
+
+.card h3{
+  margin-bottom:12px;
+}
+
+.status{
+  margin-top:12px;
+  font-weight:bold;
+}
+
+.done{
+  color:#00ff88;
+}
+
+.locked{
+  color:#ffd000;
+}
+
+.key-box{
+  display:none;
+  margin-top:30px;
+  padding:25px;
+  border-radius:25px;
+  background:rgba(0,0,0,.55);
+  box-shadow:0 0 30px #00ffff;
+}
+
+.key{
+  margin:15px 0;
+  padding:15px;
+  border-radius:12px;
+  background:#111;
+  border:2px solid #00ffff;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#00ffff;
+}
+
+.safe{
+  margin-top:12px;
+  font-weight:bold;
+}
+
+footer{
+  margin-top:35px;
+  opacity:.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">02 MODZ</div>
+
+  <div class="welcome">
+    02 MODZ WELCOME
+  </div>
+
+  <div class="speech">
+    <button onclick="speak('02 MODZ Welcome')">
+      🔊 TAP TO START
+    </button>
+  </div>
+
+  <!-- LOGIN -->
+  <div class="login">
+
+    <h2>🔐 LOGIN</h2>
+
+    <input
+      id="username"
+      type="text"
+      placeholder="USERNAME"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="PASSWORD"
+    >
+
+    <button onclick="login()">
+      LOGIN
+    </button>
+
+    <div class="message" id="message"></div>
+
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="social">
+
+    <!-- YOUTUBE -->
+    <div class="card">
+      <h3>▶️ YouTube</h3>
+
+      <a
+        class="join"
+        href="https://www.youtube.com/@02modz-X20"
+        target="_blank"
+        onclick="completeTask('youtube')"
+      >
+        SUBSCRIBE
+      </a>
+
+      <div
+        class="status locked"
+        id="youtubeStatus"
+      >
+        🔒 Not completed
+      </div>
+    </div>
+
+    <!-- TIKTOK -->
+    <div class="card">
+      <h3>🎵 TikTok</h3>
+
+      <a
+        class="join"
+        href="https://www.tiktok.com/@z4x674"
+        target="_blank"
+        onclick="completeTask('tiktok')"
+      >
+        FOLLOW
+      </a>
+
+      <div
+        class="status locked"
+        id="tiktokStatus"
+      >
+        🔒 Not completed
+      </div>
+    </div>
+
+    <!-- TELEGRAM -->
+    <div class="card">
+      <h3>✈️ Telegram</h3>
+
+      <a
+        class="join"
+        href="https://t.me/ze4xban"
+        target="_blank"
+        onclick="completeTask('telegram')"
+      >
+        JOIN TELEGRAM
+      </a>
+
+      <div
+        class="status locked"
+        id="telegramStatus"
+      >
+        🔒 Not completed
+      </div>
+    </div>
+
+  </div>
+
+  <!-- KEY -->
+  <div class="key-box" id="keyBox">
+
+    <h2>🎉 ALL TASKS COMPLETED!</h2>
+
+    <p style="margin-top:10px">
+      02 MODZ WELCOME
+    </p>
+
+    <div class="key">
+      02 SAFE
+    </div>
+
+    <button onclick="copyKey()">
+      📋 COPY KEY
+    </button>
+
+    <div class="safe">
+      🔐 02 SAFE
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 02 MODZ
+  </footer>
+
+</div>
+
+<script>
+
+const tasks = {
+  youtube:false,
+  tiktok:false,
+  telegram:false
+};
+
+function speak(text){
+
+  if("speechSynthesis" in window){
+
+    speechSynthesis.cancel();
+
+    const voice =
+      new SpeechSynthesisUtterance(text);
+
+    voice.rate = 0.9;
+    voice.pitch = 1.1;
+
+    speechSynthesis.speak(voice);
+  }
+}
+
+function login(){
+
+  const username =
+    document.getElementById("username").value.trim();
+
+  const password =
+    document.getElementById("password").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+  if(
+    username === "02-MODZ-SAFE" &&
+    password === "6902"
+  ){
+
+    message.innerHTML =
+      "✅ Login successful!";
+
+    message.style.color="#00ff88";
+
+    speak("02 MODZ Welcome");
+
+  }else{
+
+    message.innerHTML =
+      "❌ Invalid username or password.";
+
+    message.style.color="#ff4444";
+  }
+}
+
+function completeTask(task){
+
+  /*
+    This marks the button as completed
+    when the visitor clicks it.
+  */
+
+  setTimeout(function(){
+
+    tasks[task] = true;
+
+    const status =
+      document.getElementById(
+        task + "Status"
+      );
+
+    status.innerHTML =
+      "✅ Completed";
+
+    status.className =
+      "status done";
+
+    checkTasks();
+
+  },500);
+}
+
+function checkTasks(){
+
+  if(
+    tasks.youtube &&
+    tasks.tiktok &&
+    tasks.telegram
+  ){
+
+    document.getElementById(
+      "keyBox"
+    ).style.display="block";
+
+    speak(
+      "02 MODZ Welcome. All tasks completed."
+    );
+
+    window.scrollTo({
+      top:document.body.scrollHeight,
+      behavior:"smooth"
+    });
+  }
+}
+
+function copyKey(){
+
+  navigator.clipboard.writeText("02 SAFE")
+    .then(function(){
+
+      alert("✅ 02 SAFE copied!");
+
+    })
+    .catch(function(){
+
+      alert("Key: 02 SAFE");
+
+    });
+}
+
+</script>
+
+</body>
+</html>
