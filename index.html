@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 MODZ</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+    overflow-x:hidden;
+    background:#050510;
+}
+
+/* COLOR CHANGING BACKGROUND */
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+    background:linear-gradient(
+        120deg,
+        #00eaff,
+        #7b2cff,
+        #ff1493,
+        #ff7a00,
+        #00ff88,
+        #00eaff
+    );
+    background-size:600% 600%;
+    animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%}
+    25%{background-position:50% 100%}
+    50%{background-position:100% 50%}
+    75%{background-position:50% 0%}
+    100%{background-position:0% 50%}
+}
+
+.background:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.48);
+}
+
+/* LIGHTS */
+.light{
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    filter:blur(45px);
+    opacity:.65;
+    animation:float 7s ease-in-out infinite alternate;
+}
+
+.light1{
+    background:#00ffff;
+    top:5%;
+    left:5%;
+}
+
+.light2{
+    background:#ff00cc;
+    right:5%;
+    top:20%;
+    animation-delay:2s;
+}
+
+.light3{
+    background:#00ff66;
+    left:10%;
+    bottom:5%;
+    animation-delay:4s;
+}
+
+.light4{
+    background:#ff8800;
+    right:10%;
+    bottom:10%;
+    animation-delay:1s;
+}
+
+@keyframes float{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(50px,-40px) scale(1.35)}
+}
+
+/* FALLING 02 MODZ */
+.bgText{
+    position:absolute;
+    color:rgba(255,255,255,.13);
+    font-size:28px;
+    font-weight:900;
+    white-space:nowrap;
+    animation:fall linear infinite;
+}
+
+.bg1{left:5%;animation-duration:9s}
+.bg2{left:30%;animation-duration:12s;animation-delay:2s}
+.bg3{left:60%;animation-duration:10s;animation-delay:4s}
+.bg4{left:82%;animation-duration:14s;animation-delay:1s}
+
+@keyframes fall{
+    from{
+        transform:translateY(-120px) rotate(5deg);
+    }
+    to{
+        transform:translateY(110vh) rotate(-5deg);
+    }
+}
+
+/* INTRO */
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    background:rgba(0,0,0,.92);
+}
+
+.intro h1{
+    font-size:clamp(32px,9vw,60px);
+    font-weight:900;
+    background:linear-gradient(
+        90deg,
+        #00ffff,
+        #ff00ff,
+        #ffff00,
+        #00ff88
+    );
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:textColor 4s linear infinite;
+}
+
+@keyframes textColor{
+    0%{background-position:0%}
+    100%{background-position:300%}
+}
+
+.intro p{
+    margin:12px 0 25px;
+    color:#ddd;
+    font-size:15px;
+}
+
+.startBtn{
+    border:0;
+    border-radius:50px;
+    padding:16px 30px;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(
+        90deg,
+        #00c6ff,
+        #ff00cc,
+        #ff8800
+    );
+    box-shadow:0 0 30px rgba(0,255,255,.45);
+}
+
+/* CONTAINER */
+.container{
+    width:min(92%,500px);
+    margin:auto;
+    padding:20px 0 40px;
+}
+
+/* TOP BAR */
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    margin-bottom:20px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:18px;
+    background:rgba(0,0,0,.38);
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:21px;
+    font-weight:900;
+}
+
+.online{
+    color:#00ff88;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:25px 10px;
+}
+
+.hero small{
+    color:#00ffff;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+.hero h2{
+    margin:10px 0;
+    font-size:38px;
+    font-weight:900;
+}
+
+.hero p{
+    color:#ddd;
+}
+
+/* STEPS */
+.steps{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.step{
+    flex:1;
+    padding:10px;
+    text-align:center;
+    border-radius:12px;
+    background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.15);
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* CARD */
+.card{
+    padding:24px;
+    border-radius:24px;
+    background:rgba(0,0,0,.48);
+    border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(15px);
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    text-align:center;
+}
+
+.icon{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#ccc;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.action{
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    border:0;
+    border-radius:14px;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(
+        90deg,
+        #00c6ff,
+        #7b2cff,
+        #ff1493
+    );
+}
+
+/* LOADING */
+.loading{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    text-align:center;
+    border-radius:20px;
+    background:rgba(0,0,0,.45);
+}
+
+.progress{
+    height:12px;
+    margin-top:15px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#222;
+}
+
+.progressBar{
+    width:0%;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(
+        90deg,
+        #00ffff,
+        #ff00ff,
+        #ffff00,
+        #00ff88
+    );
+    transition:.2s;
+}
+
+/* CONGRATS */
+.congrats{
+    display:none;
+    margin-top:20px;
+    padding:22px;
+    text-align:center;
+    border-radius:22px;
+    background:rgba(0,0,0,.5);
+    border:1px solid #00ff88;
+}
+
+.congrats h2{
+    color:#00ff88;
+    margin-bottom:8px;
+}
+
+/* KEY */
+.keyBox{
+    display:none;
+    margin-top:20px;
+    padding:25px;
+    text-align:center;
+    border-radius:25px;
+    background:rgba(0,0,0,.58);
+    border:2px solid #00ffff;
+    box-shadow:
+        0 0 20px rgba(0,255,255,.25),
+        inset 0 0 30px rgba(255,0,255,.08);
+}
+
+.ready{
+    color:#00ff88;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.keyTitle{
+    color:#ddd;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.key{
+    padding:18px;
+    border-radius:15px;
+    background:linear-gradient(
+        90deg,
+        rgba(0,255,255,.18),
+        rgba(255,0,255,.18)
+    );
+    border:1px solid rgba(255,255,255,.25);
+    color:#fff;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.copy{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    border:0;
+    border-radius:14px;
+    color:#000;
+    background:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.safe{
+    margin-top:16px;
+    font-size:18px;
+    font-weight:900;
+    color:#00ffff;
+    text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #ff00ff;
+}
+
+/* FOOTER */
+footer{
+    margin-top:25px;
+    text-align:center;
+    color:rgba(255,255,255,.65);
+    font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:400px){
+    .hero h2{
+        font-size:32px;
+    }
+
+    .key{
+        font-size:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="light light1"></div>
+    <div class="light light2"></div>
+    <div class="light light3"></div>
+    <div class="light light4"></div>
+
+    <div class="bgText bg1">02 MODZ</div>
+    <div class="bgText bg2">02 MODZ</div>
+    <div class="bgText bg3">02 MODZ</div>
+    <div class="bgText bg4">02 MODZ</div>
+
+</div>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+
+    <h1>WELCOME TO 02 MODZ</h1>
+
+    <p>
+        PREMIUM ACCESS SYSTEM
+    </p>
+
+    <button class="startBtn" onclick="startWelcome()">
+        🔊 TAP TO START
+    </button>
+
+</div>
+
+
+<div class="container">
+
+    <!-- TOP -->
+    <div class="top">
+        <div class="logo">02 MODZ</div>
+        <div class="online">● ONLINE</div>
+    </div>
+
+
+    <!-- HERO -->
+    <div class="hero">
+
+        <small>PREMIUM ACCESS</small>
+
+        <h2>WELCOME BACK</h2>
+
+        <p>
+            Complete the steps below to continue.
+        </p>
+
+    </div>
+
+
+    <!-- STEPS -->
+    <div class="steps">
+
+        <div class="step">
+            01<br>
+            YOUTUBE
+        </div>
+
+        <div class="step">
+            02<br>
+            TIKTOK
+        </div>
+
+        <div class="step">
+            03<br>
+            TELEGRAM
+        </div>
+
+    </div>
+
+
+    <!-- YOUTUBE -->
+    <div class="card" id="card1">
+
+        <div class="icon">▶️</div>
+
+        <h3>YouTube</h3>
+
+        <p>
+            Visit our YouTube channel to continue.
+        </p>
+
+        <button class="action" onclick="go(1)">
+            OPEN YOUTUBE
+        </button>
+
+    </div>
+
+
+    <!-- TIKTOK -->
+    <div class="card" id="card2" style="display:none">
+
+        <div class="icon">🎵</div>
+
+        <h3>TikTok</h3>
+
+        <p>
+            Visit our TikTok page to continue.
+        </p>
+
+        <button class="action" onclick="go(2)">
+            OPEN TIKTOK
+        </button>
+
+    </div>
+
+
+    <!-- TELEGRAM -->
+    <div class="card" id="card3" style="display:none">
+
+        <div class="icon">✈️</div>
+
+        <h3>Telegram</h3>
+
+        <p>
+            Visit our Telegram channel to continue.
+        </p>
+
+        <button class="action" onclick="go(3)">
+            OPEN TELEGRAM
+        </button>
+
+    </div>
+
+
+    <!-- LOADING -->
+    <div class="loading" id="loading">
+
+        <div id="loadingText">
+            Preparing access... 0%
+        </div>
+
+        <div class="progress">
+            <div class="progressBar" id="progressBar"></div>
+        </div>
+
+    </div>
+
+
+    <!-- CONGRATS -->
+    <div class="congrats" id="congrats">
+
+        <h2>🎉 CONGRATULATIONS!</h2>
+
+        <p>
+            Your access is ready.
+        </p>
+
+    </div>
+
+
+    <!-- KEY -->
+    <div class="keyBox" id="keyBox">
+
+        <div class="ready">
+            ✓ ACCESS READY
+        </div>
+
+        <div class="keyTitle">
+            YOUR KEY 🔑
+        </div>
+
+        <div class="key" id="key">
+            02 SAFE
+        </div>
+
+        <button class="copy" onclick="copyKey()">
+            📋 COPY KEY
+        </button>
+
+        <div class="safe">
+            02 SAFE
+        </div>
+
+    </div>
+
+
+    <footer>
+        © 2026 02 MODZ
+    </footer>
+
+</div>
+
+
+<script>
+
+const links = {
+
+    youtube:
+    "https://www.youtube.com/@02modz-X20",
+
+    tiktok:
+    "https://www.tiktok.com/@z4x674",
+
+    telegram:
+    "https://t.me/ze4xban"
+
+};
+
+
+/* WELCOME VOICE */
+function startWelcome(){
+
+    const intro =
+        document.getElementById("intro");
+
+    intro.style.display = "none";
+
+    if("speechSynthesis" in window){
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                "Welcome to 02 Modz"
+            );
+
+        speech.rate = 0.9;
+        speech.pitch = 1;
+
+        speechSynthesis.speak(speech);
+
+    }
+
+}
+
+
+/* OPEN SOCIAL LINK */
+function go(step){
+
+    if(step === 1){
+
+        window.open(
+            links.youtube,
+            "_blank"
+        );
+
+        next(2);
+
+    }
+
+    else if(step === 2){
+
+        window.open(
+            links.tiktok,
+            "_blank"
+        );
+
+        next(3);
+
+    }
+
+    else if(step === 3){
+
+        window.open(
+            links.telegram,
+            "_blank"
+        );
+
+        startLoading();
+
+    }
+
+}
+
+
+/* NEXT CARD */
+function next(step){
+
+    document.getElementById("card1")
+        .style.display =
+        step === 1 ? "block" : "none";
+
+    document.getElementById("card2")
+        .style.display =
+        step === 2 ? "block" : "none";
+
+    document.getElementById("card3")
+        .style.display =
+        step === 3 ? "block" : "none";
+
+}
+
+
+/* LOADING */
+function startLoading(){
+
+    document.getElementById("card1")
+        .style.display = "none";
+
+    document.getElementById("card2")
+        .style.display = "none";
+
+    document.getElementById("card3")
+        .style.display = "none";
+
+    const loading =
+        document.getElementById("loading");
+
+    const bar =
+        document.getElementById("progressBar");
+
+    const text =
+        document.getElementById("loadingText");
+
+    loading.style.display = "block";
+
+    let progress = 0;
+
+    const timer = setInterval(function(){
+
+        progress++;
+
+        bar.style.width =
+            progress + "%";
+
+        text.innerText =
+            "Preparing access... " +
+            progress + "%";
+
+        if(progress >= 100){
+
+            clearInterval(timer);
+
+            showCongrats();
+
+        }
+
+    },30);
+
+}
+
+
+/* CONGRATULATIONS */
+function showCongrats(){
+
+    document.getElementById("congrats")
+        .style.display = "block";
+
+    document.getElementById("keyBox")
+        .style.display = "block";
+
+    if("speechSynthesis" in window){
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                "Congratulations. Your access is ready."
+            );
+
+        speech.rate = 0.9;
+
+        speechSynthesis.speak(speech);
+
+    }
+
+}
+
+
+/* COPY KEY */
+function copyKey(){
+
+    const key =
+        document.getElementById("key")
+        .innerText.trim();
+
+    navigator.clipboard.writeText(key)
+        .then(function(){
+
+            const button =
+                document.querySelector(".copy");
+
+            button.innerText =
+                "✓ COPIED";
+
+            setTimeout(function(){
+
+                button.innerText =
+                    "📋 COPY KEY";
+
+            },2000);
+
+        })
+        .catch(function(){
+
+            alert("Copy failed. Please copy 02 SAFE manually.");
+
+        });
+
+}
+
+</script>
+
+</body>
+</html>
