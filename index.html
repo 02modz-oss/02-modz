@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>02 MODZ SAFE</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#fff;
+    background:#02050a;
+}
+
+/* Animated Background */
+.bg{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:-1;
+    background:
+      radial-gradient(circle at 20% 20%,#004cff55,transparent 30%),
+      radial-gradient(circle at 80% 80%,#00d9ff44,transparent 30%),
+      #02050a;
+}
+
+.circle{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    animation:move 12s infinite alternate ease-in-out;
+}
+
+.c1{
+    width:300px;
+    height:300px;
+    background:#006eff55;
+    top:-100px;
+    left:-80px;
+}
+
+.c2{
+    width:260px;
+    height:260px;
+    background:#00d9ff44;
+    right:-70px;
+    top:25%;
+    animation-duration:15s;
+}
+
+.c3{
+    width:220px;
+    height:220px;
+    background:#7b00ff44;
+    bottom:-70px;
+    left:25%;
+    animation-duration:18s;
+}
+
+@keyframes move{
+    from{
+        transform:translate(0,0) rotate(0deg);
+    }
+    to{
+        transform:translate(100px,80px) rotate(180deg);
+    }
+}
+
+/* Rotating glow */
+.ring{
+    position:absolute;
+    width:450px;
+    height:450px;
+    border:1px solid #00cfff22;
+    border-radius:50%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    animation:spin 18s linear infinite;
+}
+
+.ring:before,
+.ring:after{
+    content:"";
+    position:absolute;
+    inset:30px;
+    border:1px solid #008cff22;
+    border-radius:50%;
+}
+
+.ring:after{
+    inset:70px;
+}
+
+@keyframes spin{
+    to{
+        transform:translate(-50%,-50%) rotate(360deg);
+    }
+}
+
+/* Main */
+.container{
+    width:95%;
+    max-width:850px;
+    margin:40px auto;
+    padding:35px 25px;
+    text-align:center;
+    background:rgba(4,12,22,.78);
+    backdrop-filter:blur(18px);
+    border:1px solid #00cfff44;
+    border-radius:28px;
+    box-shadow:
+      0 0 50px #008cff22,
+      inset 0 0 30px #00cfff0d;
+}
+
+/* Logo */
+.logo{
+    width:88px;
+    height:88px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    font-weight:900;
+
+    background:linear-gradient(
+        135deg,
+        #00eaff,
+        #006eff,
+        #8b00ff
+    );
+
+    box-shadow:
+      0 0 20px #00cfff,
+      0 0 50px #006eff88;
+
+    animation:logoSpin 5s linear infinite;
+}
+
+@keyframes logoSpin{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+h1{
+    margin-top:20px;
+    font-size:32px;
+    letter-spacing:2px;
+    text-shadow:0 0 15px #00cfff;
+}
+
+.subtitle{
+    margin-top:8px;
+    color:#8da5b8;
+    font-size:14px;
+}
+
+/* Social row */
+.social-row{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:35px;
+}
+
+.card{
+    width:31%;
+    min-height:145px;
+    padding:18px 10px;
+    border-radius:18px;
+    background:linear-gradient(
+        145deg,
+        rgba(12,30,45,.95),
+        rgba(3,12,20,.95)
+    );
+
+    border:1px solid #1b4158;
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.03);
+    border-color:#00cfff;
+    box-shadow:0 0 25px #00cfff33;
+}
+
+.social-icon{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.card p{
+    font-size:11px;
+    color:#71899a;
+    margin-bottom:14px;
+}
+
+.join{
+    border:0;
+    padding:9px 17px;
+    border-radius:9px;
+    background:linear-gradient(90deg,#006eff,#00cfff);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.join:hover{
+    box-shadow:0 0 15px #00cfff;
+}
+
+.join.done{
+    background:#0caf6b;
+}
+
+/* Get Key */
+.getkey{
+    width:100%;
+    margin-top:28px;
+    padding:16px;
+    border:0;
+    border-radius:15px;
+
+    background:linear-gradient(
+        90deg,
+        #006eff,
+        #00cfff,
+        #7b00ff
+    );
+
+    background-size:200%;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+
+    animation:gradient 4s linear infinite;
+}
+
+@keyframes gradient{
+    0%{
+        background-position:0%;
+    }
+    100%{
+        background-position:200%;
+    }
+}
+
+.getkey:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+    animation:none;
+}
+
+/* Key */
+.keybox{
+    display:none;
+    margin-top:22px;
+    padding:20px;
+    border-radius:18px;
+    background:#030b12;
+    border:1px solid #00d9ff;
+    box-shadow:0 0 25px #00cfff22;
+}
+
+.keybox h2{
+    margin-bottom:14px;
+}
+
+.key{
+    padding:13px;
+    margin:9px 0;
+    border-radius:10px;
+    background:#010509;
+    border:1px dashed #00cfff;
+    color:#00dcff;
+    font-weight:bold;
+}
+
+.copy{
+    margin-top:10px;
+    padding:10px 20px;
+    border:0;
+    border-radius:10px;
+    background:#10a86a;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.note{
+    margin-top:18px;
+    color:#536b7b;
+    font-size:11px;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .container{
+        margin:20px auto;
+        padding:28px 14px;
+    }
+
+    .social-row{
+        gap:8px;
+    }
+
+    .card{
+        padding:14px 5px;
+        min-height:135px;
+    }
+
+    .social-icon{
+        font-size:26px;
+    }
+
+    .card h3{
+        font-size:13px;
+    }
+
+    .join{
+        padding:8px 10px;
+        font-size:11px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
+    <div class="ring"></div>
+</div>
+
+<div class="container">
+
+    <div class="logo">02</div>
+
+    <h1>02 MODZ SAFE</h1>
+
+    <p class="subtitle">
+        Join all channels to unlock your key
+    </p>
+
+    <div class="social-row">
+
+        <!-- TELEGRAM -->
+        <div class="card">
+
+            <div class="social-icon">✈️</div>
+
+            <h3>Telegram</h3>
+
+            <p>Join Channel</p>
+
+            <button
+                class="join"
+                onclick="join(0,this,
+                'https://t.me/ze4xban')">
+                JOIN
+            </button>
+
+        </div>
+
+        <!-- YOUTUBE -->
+        <div class="card">
+
+            <div class="social-icon">▶️</div>
+
+            <h3>YouTube</h3>
+
+            <p>Subscribe</p>
+
+            <button
+                class="join"
+                onclick="join(1,this,
+                'https://www.youtube.com/@02modz-X20')">
+                JOIN
+            </button>
+
+        </div>
+
+        <!-- TIKTOK -->
+        <div class="card">
+
+            <div class="social-icon">♪</div>
+
+            <h3>TikTok</h3>
+
+            <p>Follow Account</p>
+
+            <button
+                class="join"
+                onclick="join(2,this,
+                'https://www.tiktok.com/@z4x674')">
+                JOIN
+            </button>
+
+        </div>
+
+    </div>
+
+    <button
+        id="getKey"
+        class="getkey"
+        onclick="getKey()"
+        disabled>
+        🔐 GET KEY
+    </button>
+
+    <div id="keyBox" class="keybox">
+
+        <h2>✅ KEY UNLOCKED</h2>
+
+        <div class="key">
+            02-MODZ-SAFE
+        </div>
+
+        <div class="key">
+            KEY 6902
+        </div>
+
+        <button
+            class="copy"
+            onclick="copyKey()">
+            📋 COPY KEY
+        </button>
+
+    </div>
+
+    <div class="note">
+        02 MODZ SAFE • Secure Key System
+    </div>
+
+</div>
+
+<script>
+
+let done = [false,false,false];
+
+function join(index,button,url){
+
+    window.open(url,"_blank");
+
+    done[index] = true;
+
+    button.innerHTML = "✓ DONE";
+    button.classList.add("done");
+
+    check();
+}
+
+function check(){
+
+    if(
+        done[0] &&
+        done[1] &&
+        done[2]
+    ){
+
+        document.getElementById("getKey").disabled=false;
+
+        document.getElementById("getKey").innerHTML=
+            "🔓 GET KEY";
+    }
+}
+
+function getKey(){
+
+    if(
+        done[0] &&
+        done[1] &&
+        done[2]
+    ){
+
+        document.getElementById("keyBox")
+        .style.display="block";
+
+        document.getElementById("getKey")
+        .innerHTML="✓ KEY UNLOCKED";
+
+        document.getElementById("keyBox")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+    }
+}
+
+function copyKey(){
+
+    const key =
+`02-MODZ-SAFE
+KEY 6902`;
+
+    navigator.clipboard.writeText(key);
+
+    alert("✅ Key copied!");
+}
+
+</script>
+
+</body>
+</html>
